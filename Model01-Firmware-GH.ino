@@ -592,7 +592,7 @@ void setup() {
   LEDRainbowWaveEffect.update_delay(50);
 
   LEDDigitalRainEffect.DROP_TICKS = 22; // Make the rain fall faster
-
+  
 }
 
 /** loop is the second of the standard Arduino sketch functions.
