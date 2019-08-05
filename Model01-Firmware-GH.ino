@@ -78,6 +78,8 @@
 // Plugins added by Glenn
 #include <Kaleidoscope-LED-Fire.h>
 #include <Kaleidoscope-LED-Wavepool.h>
+#include <Kaleidoscope-LEDEffect-Rainbow.h>
+#include <Kaleidoscope-LEDEffect-DigitalRain.h>
 
 
 /** This 'enum' is a list of all the macros used by the Model 01's firmware
@@ -527,9 +529,10 @@ KALEIDOSCOPE_INIT_PLUGINS(
   USBQuirks,
 
 // Plugins added by Glenn
-  FireEffect,
-  WavepoolEffect
-
+FireEffect,
+WavepoolEffect,
+LEDRainbowEffect, LEDRainbowWaveEffect,
+LEDDigitalRainEffect
 
 );
 
@@ -583,6 +586,12 @@ void setup() {
 
   WavepoolEffect.idle_timeout = 5000;  // 5 seconds
   WavepoolEffect.activate();
+
+  LEDRainbowEffect.brightness(150);
+  LEDRainbowWaveEffect.brightness(150);
+  LEDRainbowWaveEffect.update_delay(50);
+
+  LEDDigitalRainEffect.DROP_TICKS = 22; // Make the rain fall faster
 
 }
 
