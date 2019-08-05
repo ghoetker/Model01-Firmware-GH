@@ -75,8 +75,10 @@
 // Support for USB quirks, like changing the key state report protocol
 #include "Kaleidoscope-USB-Quirks.h"
 
-// Added by Glenn
+// Plugins added by Glenn
 #include <Kaleidoscope-LED-Fire.h>
+#include <Kaleidoscope-LED-Wavepool.h>
+
 
 /** This 'enum' is a list of all the macros used by the Model 01's firmware
   * The names aren't particularly important. What is important is that each
@@ -430,6 +432,7 @@ USE_MAGIC_COMBOS({.action = toggleKeyboardProtocol,
   .keys = { R3C6, R0C0, R0C6 }
 });
 
+
 // First, tell Kaleidoscope which plugins you want to use.
 // The order can be important. For example, LED effects are
 // added in the order they're listed here.
@@ -515,13 +518,19 @@ KALEIDOSCOPE_INIT_PLUGINS(
   // The MagicCombo plugin lets you use key combinations to trigger custom
   // actions - a bit like Macros, but triggered by pressing multiple keys at the
   // same time.
-  MagicCombo,
+ MagicCombo,
 
   // The USBQuirks plugin lets you do some things with USB that we aren't
   // comfortable - or able - to do automatically, but can be useful
   // nevertheless. Such as toggling the key report protocol between Boot (used
   // by BIOSes) and Report (NKRO).
-  USBQuirks
+  USBQuirks,
+
+// Plugins added by Glenn
+  FireEffect,
+  WavepoolEffect
+
+
 );
 
 /** The 'setup' function is one of the two standard Arduino sketch functions.
@@ -568,6 +577,13 @@ void setup() {
   // maps for. To make things simple, we set it to five layers, which is how
   // many editable layers we have (see above).
   ColormapEffect.max_layers(5);
+
+  // Plugins added by Glenn
+  FireEffect.activate();
+
+  WavepoolEffect.idle_timeout = 5000;  // 5 seconds
+  WavepoolEffect.activate();
+
 }
 
 /** loop is the second of the standard Arduino sketch functions.
